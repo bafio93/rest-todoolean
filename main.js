@@ -10,7 +10,10 @@ $(document).ready(function(){
     // Piccola parte di interfaccia utente!
     $("input").focus(function(){
         $("strong").addClass("support");
-    })
+    });
+    $("input").blur(function(){
+        $("strong").removeClass("support");
+    });
 });
 
 
