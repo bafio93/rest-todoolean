@@ -36,18 +36,6 @@ header input {
     border: none;
 }
 
-header button {
-    margin-left: 10px;
-    color: ivory;
-    background-color: transparent;
-    border: none;
-}
-
-header button:hover {
-    cursor: pointer;
-    color: cyan;
-}
-
 /* Stile della lista */
 
 ul {
@@ -55,18 +43,35 @@ ul {
     text-align: center;
 }
 
-ul li {
+li {
     margin: 5px 0;
 }
 
 /* Stile di supporto */
 
-ul li:hover {
-    color: orange;
+input.support {
+    display: none;
+}
+
+header input.modify {
+    background-color: coral;
+    height: 35px;
+    padding: 0 10px;
+    color: ivory;
+    border: none;
+}
+
+li:hover {
+    color: coral;
 }
 
 ul li i:hover {
     cursor: pointer;
+}
+
+ul li.support {
+    background-color: coral;
+    color: ivory;
 }
 
 strong {

@@ -5,9 +5,17 @@ $(document).ready(function(){
     posta_nuovo();
     // Ora permetto all'utente di eliminare l'elemento cliccato:
     elimina_elemento();
+    // Ora permetto all'utente di modificare l'elemento cliccato:
+    modifica_elemento();
+    // Piccola parte di interfaccia utente!
+    $("input").focus(function(){
+        $("strong").addClass("support");
+    })
 });
 
+
 // FUNZIONI:
+
 
 // FUNZIONE DI STAMPA DELLA LISTA:
 function stampa_lista(){
@@ -44,13 +52,10 @@ function compila_lista(data_success){
 
 // FUNZIONE PER AGGIUNUNGERE UN NUOVO ELEMENTO:
 function posta_nuovo(){
-    $("input").focus(function(){
-        $("strong").addClass("support");
-    })
-    $("input").change(function(){
-        var nuovo_oggetto = $("input").val();
+    $("input.new").change(function(){
+        var nuovo_oggetto = $("input.new").val();
         if (nuovo_oggetto.length > 0) {
-            //Ora chiamo con metodo post:
+            // Ora chiamo con metodo post:
             $.ajax ({
                 "url": "http://157.230.17.132:3019/todos",
                 "method":"POST",
@@ -58,12 +63,13 @@ function posta_nuovo(){
                     "text":nuovo_oggetto
                 }
             });
-            $("input").val("");
+            $("input.new").val("");
             stampa_lista();
             $("strong").removeClass("support");
         }
     });
 }
+
 
 // FUNZIONE PER ELIMINARE UN ELEMENTO:
 function elimina_elemento() {
@@ -78,6 +84,42 @@ function elimina_elemento() {
             },
             "error": function(){
                 alert("ERROR! -.-");
+            }
+        });
+    })
+}
+
+
+// FUNZIONE PER MODIFICARE UN ELEMENTO:
+function modifica_elemento() {
+    $("#lista").on("click","i.fa-pencil-alt",function(){
+        // Prendo l'id dell'elemento cliccato:
+        to_do_id = $(this).parent("li").attr("data-id");
+        // Piccole accortezza stilistiche:
+        $("input.modify").removeClass("support");
+        $("input.new").addClass("support");
+        $(this).parent("li").addClass("support");
+        // Intercetto il valore nel campo modify:
+        $("input.modify").change(function(){
+            var nuovo_oggetto = $("input.modify").val();
+            if (nuovo_oggetto.length > 0) {
+                // Ora chiamo con metodo patch:
+                $.ajax ({
+                    "url": "http://157.230.17.132:3019/todos/"+to_do_id,
+                    "method":"PATCH",
+                    "data": {
+                        "text":nuovo_oggetto
+                    },
+                    "success": function(data_success){
+                        stampa_lista()
+                    }
+                });
+                // Svuotiamo il campo e resettiamo tutte le classi:
+                $("input.modify").val("");
+                $("strong").removeClass("support");
+                $("input.modify").addClass("support");
+                $("input.new").removeClass("support");
+                $(this).parent("li").removeClass("support");
             }
         });
     })
