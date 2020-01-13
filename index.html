@@ -14,7 +14,10 @@
         <main>
             <header>
                 <h1>TO-DO-LIST by Bafs93</h1>
-                <input type="text" name="" placeholder="Inserisci un nuovo to-do!">
+                <div class="right">
+                    <strong>Premi INVIO per inserire! -&gt;&nbsp;</strong>
+                    <input type="text" name="" placeholder="Inserisci un nuovo to-do!">
+                </div>
             </header>
             <ul id="lista">
             </ul>
@@ -22,7 +25,11 @@
 
         <!-- Inserire qui il template handlebars -->
         <script id="template_lista" type="text/x-handlebars-template">
-            <li>{{ oggetto_lista }}</li>
+            <li data-id="{{ data_id }}">
+                {{ oggetto_lista }}&nbsp;&nbsp;&nbsp;
+                <i class="far fa-trash-alt"></i>&nbsp;&nbsp;&nbsp;
+                <i class="fas fa-pencil-alt"></i>
+            </li>
         </script>
 
         <!-- Mio script -->

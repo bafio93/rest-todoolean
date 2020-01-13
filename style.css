@@ -52,20 +52,27 @@ header button:hover {
 
 ul {
     color: ivory;
-    font-size: 90%;
     text-align: center;
+}
+
+ul li {
+    margin: 5px 0;
 }
 
 /* Stile di supporto */
 
-header button.disattivato {
-    color: rgb(76, 88, 100);
-}
-
-header button.disattivato:hover {
-    cursor: default;
-}
-
-ul li.festive {
+ul li:hover {
     color: orange;
+}
+
+ul li i:hover {
+    cursor: pointer;
+}
+
+strong {
+    color: transparent;
+}
+
+strong.support {
+    color: ivory;
 }
